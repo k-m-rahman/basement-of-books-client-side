@@ -39,7 +39,7 @@ const Header = () => {
   };
 
   return (
-    <div className="shadow-md md:pb-5 lg:pb-0 bg-[#c1c2ff] text-center sticky top-0 z-10 dark:bg-slate-800">
+    <div className="shadow-md md:pb-5 lg:pb-0 bg-[#ffb662dc] text-center sticky top-0 z-10 dark:bg-slate-800">
       <Navbar className="nav-bg  rounded-none pt-4 pb-6 " fluid={true}>
         <NavLink className="flex " to="/">
           <div className="flex gap-2">
