@@ -1,9 +1,17 @@
-import { Button, FileInput, Label, Spinner, TextInput } from "flowbite-react";
+import {
+  Button,
+  FileInput,
+  Label,
+  Radio,
+  Spinner,
+  TextInput,
+} from "flowbite-react";
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
+import useToken from "../../hooks/useToken";
 
 const Register = () => {
   const [signupError, setSignUpError] = useState("");
@@ -22,6 +30,8 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,11 +40,15 @@ const Register = () => {
 
   const errorStyle = "text-red-500 font-semibold text-xs mt-1";
 
+  if (token) {
+    navigate(from, { replace: true });
+  }
+
   const handleSignUp = (data) => {
     console.log(data);
 
     setLoading(true);
-    const { email, password, name, img } = data;
+    const { email, password, name, img, role } = data;
 
     // handling the image file
     const imgbbKey = process.env.REACT_APP_imgagebb_key;
@@ -56,12 +70,7 @@ const Register = () => {
             setSignUpError("");
             handleEmailVerification();
             handleProfileUpdate(name, imgData.data.url);
-
-            swal(
-              "User Created successfully!",
-              "Please verify your email!",
-              "success"
-            );
+            saveUser(name, email, role);
           })
           .catch((error) => {
             setSignUpError(error.message);
@@ -89,17 +98,38 @@ const Register = () => {
     updateUserProfile(profile)
       .then(() => {
         console.log("User name and photo updated");
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
         setForUpdate((prev) => !prev);
       })
       .catch((error) => console.error(error));
+  };
+
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        swal(
+          "User Created successfully!",
+          "Please verify your email!",
+          "success"
+        );
+        setCreatedUserEmail(email);
+      });
   };
 
   return (
     <div className="dark:bg-slate-600  py-10">
       <div className="mx-5 md:w-1/2 md:mx-auto mt-10 border p-5 pb-10 rounded-lg shadow-xl mb-10">
         <div>
-          <h3 className="text-3xl font-semibold mb-4 dark:text-slate-200">
+          <h3 className="text-3xl text-center font-semibold mb-4 dark:text-slate-200">
             Register
           </h3>
         </div>
@@ -195,6 +225,29 @@ const Register = () => {
               <p className={errorStyle}>{errors.password?.message}</p>
             )}
           </div>
+
+          {/* user role */}
+
+          <fieldset className="flex gap-4" id="radio">
+            <legend className="mb-2 font-semibold text-sm">
+              Choose your role
+            </legend>
+            {/* buyer role button */}
+            <div className="flex items-center gap-2">
+              <Radio
+                id="buyer"
+                {...register("role")}
+                value="Buyer"
+                defaultChecked={true}
+              />
+              <Label htmlFor="buyer">Buyer</Label>
+            </div>
+            {/* seller role button */}
+            <div className="flex items-center gap-2">
+              <Radio id="seller" {...register("role")} value="Seller" />
+              <Label htmlFor="seller">Seller</Label>
+            </div>
+          </fieldset>
 
           {signupError && <p className="text-red-500 text-sm">{signupError}</p>}
           <div className="flex items-center gap-2">
