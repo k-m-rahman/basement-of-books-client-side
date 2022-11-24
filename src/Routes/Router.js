@@ -11,6 +11,10 @@ import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Login/Register";
+import AdminRoute from "./AdmitRoute";
+import BuyerRoute from "./BuyerRoute";
+import PrivateRoute from "./PrivateRoute";
+import SellerRoute from "./SellerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -33,35 +37,67 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/myOrders",
-        element: <MyOrders></MyOrders>,
+        element: (
+          <BuyerRoute>
+            <MyOrders></MyOrders>
+          </BuyerRoute>
+        ),
       },
       {
         path: "/dashboard/addProduct",
-        element: <AddProduct></AddProduct>,
+        element: (
+          <SellerRoute>
+            <AddProduct></AddProduct>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/myProducts",
-        element: <MyProducts></MyProducts>,
+        element: (
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/myBuyers",
-        element: <MyBuyers></MyBuyers>,
+        element: (
+          <SellerRoute>
+            <MyBuyers></MyBuyers>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/allSellers",
-        element: <AllSellers></AllSellers>,
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allBuyers",
-        element: <AllBuyers></AllBuyers>,
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/reportedItems",
-        element: <ReportedItems></ReportedItems>,
+        element: (
+          <AdminRoute>
+            <ReportedItems></ReportedItems>
+          </AdminRoute>
+        ),
       },
     ],
   },

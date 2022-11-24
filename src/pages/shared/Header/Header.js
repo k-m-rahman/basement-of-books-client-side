@@ -1,6 +1,6 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import React, { useContext } from "react";
-import { Link, NavLink, ScrollRestoration } from "react-router-dom";
+import { NavLink, ScrollRestoration } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { ThemeContext } from "../../../contexts/ThemeProvider";
 import { addDarkModeDataToDb } from "../../../utils/fakeDb";
@@ -9,9 +9,11 @@ import logo from "../../../assets/books-icon.png";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "./Header.css";
+import useRoleOfUser from "../../../hooks/useRoleOfUser";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
+  const [role] = useRoleOfUser(user?.email);
   const { darkMode, setDarkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
 
@@ -95,7 +97,13 @@ const Header = () => {
                     ? "bg-cyan-100 p-2 rounded-md  sm:hover:scale-110 mb-1"
                     : "bg-cyan-400 font-bold  p-2 rounded-md sm:hover:scale-110 mb-1"
                 }
-                to="/dashboard"
+                to={
+                  role === "Buyer"
+                    ? "/dashboard/myOrders"
+                    : role === "Seller"
+                    ? "/dashboard/addProduct"
+                    : "/dashboard/allSellers"
+                }
               >
                 Dashboard
               </NavLink>

@@ -98,7 +98,7 @@ const Dashboard = () => {
     </>
   );
   return (
-    <div className="dark:bg-slate-500">
+    <div className="dark:bg-slate-500 ">
       <Header></Header>
       <div className="w-full grid grid-cols-1 lg:grid-cols-10 ">
         {/* menus for little devices */}
