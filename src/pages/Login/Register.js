@@ -6,7 +6,7 @@ import {
   Spinner,
   TextInput,
 } from "flowbite-react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { useForm } from "react-hook-form";
@@ -40,9 +40,11 @@ const Register = () => {
 
   const errorStyle = "text-red-500 font-semibold text-xs mt-1";
 
-  if (token) {
-    navigate(from, { replace: true });
-  }
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, from, navigate]);
 
   const handleSignUp = (data) => {
     console.log(data);

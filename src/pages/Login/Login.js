@@ -1,11 +1,12 @@
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../contexts/AuthProvider";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   const { providerLogin, login, setLoading, resetPassword, loading } =
@@ -25,6 +26,14 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const errorStyle = "text-red-500 font-semibold text-xs mt-1";
+  const [loginUserEmail, setLogInUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
+
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, from, navigate]);
 
   // google signIn
   const handleGoogleSignIn = () => {
@@ -34,7 +43,7 @@ const Login = () => {
         console.log(user);
         setLoginError("");
         toast.success("Logged in successfully!", { duration: 2000 });
-        navigate(from, { replace: true });
+        saveUser(user.displayName, user.email);
       })
       .catch((error) => {
         console.error(error);
@@ -42,6 +51,23 @@ const Login = () => {
       })
       .finally(() => {
         setLoading(false);
+      });
+  };
+
+  // saving user as buyer for google log in
+  const saveUser = (name, email) => {
+    const user = { name, email, role: "Buyer" };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setLogInUserEmail(email);
       });
   };
 
@@ -54,7 +80,7 @@ const Login = () => {
         const user = result.user;
         setLoginError("");
         toast.success("Logged in successfully!", { duration: 2000 });
-        navigate(from, { replace: true });
+        setLogInUserEmail(email);
       })
       .catch((error) => {
         console.error(error);
