@@ -1,18 +1,72 @@
-import { Card } from "flowbite-react";
+import { Button } from "flowbite-react";
 import React from "react";
 
 const ProductCard = ({ product }) => {
-  const { title, image, description } = product;
+  const {
+    title,
+    image,
+    description,
+    condition,
+    date,
+    location,
+    originalPrice,
+    resalePrice,
+    sellerName,
+    timeUsed,
+    sellerEmail,
+  } = product;
+  let date2 = new Date(date);
+  console.log(date2);
   return (
-    <div className="mx-auto">
-      <Card horizontal={true} imgSrc={image}>
-        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {title}
-        </h5>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          {description}
-        </p>
-      </Card>
+    <div className="mx-auto w-full">
+      <div className="flex  flex-col md:flex-row gap-5 justify-center items-center md:justify-start md:items-start  p-3 dark:bg-slate-700 rounded-lg shadow-lg border border-slate-200">
+        <div className=" w-full md:w-1/3">
+          <img
+            className="border rounded-lg w-full h-60 md:h-52"
+            src={image}
+            alt=""
+          />
+        </div>
+        <div className="w-full md:w-2/3 ">
+          <h5 className="text-2xl text-center md:text-start font-bold tracking-tight text-gray-900 dark:text-white">
+            {title}
+          </h5>
+          <div className="my-2 ">
+            <p className="font-semibold text-center md:text-start text-gray-900 dark:text-white">
+              Seller's Name: {sellerName}
+            </p>
+
+            <div className="text-sm mt-2">
+              <p className=" text-center md:text-start font-semibold text-gray-900 dark:text-white mb-2">
+                Post created on : {date2.toDateString()}
+              </p>
+              <p className="grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
+                <span>
+                  Original Price:{" "}
+                  <span className="text-amber-500">${originalPrice}</span>{" "}
+                </span>
+                <span>
+                  Resale Price:{" "}
+                  <span className="text-amber-500">${resalePrice}</span>{" "}
+                </span>
+              </p>
+              <p className="grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
+                <span>Location: {location}</span>
+                <span>Used: {timeUsed}</span>
+              </p>
+            </div>
+          </div>
+          <p className="font-normal md:h-16 shadow-sm border p-2 rounded md:overflow-auto italic text-sm text-gray-700 dark:text-gray-400">
+            {description}
+          </p>
+
+          <div className="my-4 ">
+            <Button className="mx-auto" color="purple">
+              Book Now
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
