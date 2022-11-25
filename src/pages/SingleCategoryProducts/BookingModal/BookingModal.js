@@ -5,7 +5,7 @@ import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const BookingModal = ({ showModal, setShowModal, selectedProduct }) => {
-  const { title, resalePrice } = selectedProduct;
+  const { title, resalePrice, image } = selectedProduct;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleBooking = (event) => {
@@ -22,6 +22,7 @@ const BookingModal = ({ showModal, setShowModal, selectedProduct }) => {
       buyerEmail: user.email,
       mobile,
       location,
+      image,
     };
     console.log(booking);
     fetch("http://localhost:5000/bookings", {
@@ -42,8 +43,10 @@ const BookingModal = ({ showModal, setShowModal, selectedProduct }) => {
             "success"
           );
           navigate("/dashboard/myOrders");
+        } else if (data.alreadyBooked) {
+          swal("", `${data.message}`, "error");
         } else {
-          swal("Something went wrong!", "error");
+          swal("Something went wrong!", "", "error");
         }
         setShowModal(false);
       })
