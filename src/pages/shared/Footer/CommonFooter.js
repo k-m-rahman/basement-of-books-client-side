@@ -9,7 +9,7 @@ const CommonFooter = () => {
     <div>
       <div className="bg-slate-700  pt-20 mb-0 p-5  rounded-none">
         <div className="w-full text-center">
-          <div className="w-full justify-between  sm:flex sm:items-center sm:justify-between">
+          <div className="w-full justify-between  lg:flex lg:items-center lg:justify-between">
             <Link to={`/`}>
               <div className="flex items-center justify-center gap-2 text-2xl lg:text-3xl font-semibold mb-3 lg:mb-0">
                 <span className="bg-gradient-to-r from-pink-500 to-pink-700 p-2 rounded-l-full">
@@ -24,7 +24,7 @@ const CommonFooter = () => {
               </div>
             </Link>
             {/* social links */}
-            <div className="text-white flex gap-5 justify-center items-center mt-5 md:mt-0">
+            <div className="text-white flex gap-5 justify-center items-center my-5 lg:my-0 md:mt-0">
               <span className="text-blue-500 w-6 h-6 hover:scale-125 duration-150">
                 {" "}
                 <FaFacebook className="w-full h-full"></FaFacebook>{" "}

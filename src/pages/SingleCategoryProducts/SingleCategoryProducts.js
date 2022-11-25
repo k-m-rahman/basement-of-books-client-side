@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData, useNavigation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import BookingModal from "./BookingModal/BookingModal";
 import ProductCard from "./ProductCard/ProductCard";
 
 const SingleCategoryProducts = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const data = useLoaderData();
   const navigation = useNavigation();
-  console.log(data);
+
   const { category, products } = data;
 
   if (navigation.state === "loading") {
@@ -25,9 +28,21 @@ const SingleCategoryProducts = () => {
       </div>
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         {products.map((product) => (
-          <ProductCard key={product._id} product={product}></ProductCard>
+          <ProductCard
+            key={product._id}
+            product={product}
+            setShowModal={setShowModal}
+            setSelectedProduct={setSelectedProduct}
+          ></ProductCard>
         ))}
       </div>
+      {showModal && (
+        <BookingModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          selectedProduct={selectedProduct}
+        ></BookingModal>
+      )}
     </div>
   );
 };
