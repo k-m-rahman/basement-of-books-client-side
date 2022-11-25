@@ -11,6 +11,7 @@ import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Login/Register";
+import SingleCategoryProducts from "../pages/SingleCategoryProducts/SingleCategoryProducts";
 import AdminRoute from "./AdmitRoute";
 import BuyerRoute from "./BuyerRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -32,6 +33,20 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/category/:id",
+        element: (
+          <PrivateRoute>
+            <SingleCategoryProducts></SingleCategoryProducts>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.id}`, {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }),
       },
     ],
   },
