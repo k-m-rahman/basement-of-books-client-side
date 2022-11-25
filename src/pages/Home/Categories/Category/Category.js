@@ -1,4 +1,5 @@
 import React from "react";
+import { FaAngleRight } from "react-icons/fa";
 
 const Category = ({ category }) => {
   const { title, image } = category;
@@ -10,8 +11,8 @@ const Category = ({ category }) => {
         alt=""
       />
       <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
-        <p className=" text-center font-semibold tracking-wide text-white">
-          {title}
+        <p className="flex justify-center items-center gap-2 text-center font-semibold tracking-wide text-white">
+          {title} <FaAngleRight></FaAngleRight>
         </p>
       </div>
     </div>

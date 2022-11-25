@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Spinner } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 import Category from "./Category/Category";
 
@@ -20,11 +20,17 @@ const Categories = () => {
 
   return (
     <div>
-      <div className="my-5 text-center">
-        <h3 className="text-5xl font-semibold dark:text-white">Categories</h3>
+      <div className="my-5 text-center flex flex-col gap-4 px-4">
+        <h3 className="capitalize text-4xl md:text-5xl font-semibold text-slate-700 dark:text-slate-100">
+          Categories
+        </h3>
+        <p className="  text-slate-500 dark:text-slate-200 ">
+          These are the categories of our collection of used books. Collect the
+          suitable one for for your satisfaction
+        </p>
       </div>
       <div className="">
-        <div className="relative px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-14">
+        <div className="relative px-4 py-10 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
           {/* <div className="absolute inset-x-0 top-0 items-center justify-center hidden overflow-hidden md:flex md:inset-y-0">
             <svg
               viewBox="0 0 88 88"
@@ -70,7 +76,9 @@ const Categories = () => {
 
           <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {categories?.map((category) => (
-              <Category key={category._id} category={category}></Category>
+              <Link key={category._id} to={`/category/${category._id}`}>
+                <Category category={category}></Category>
+              </Link>
             ))}
           </div>
         </div>

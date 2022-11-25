@@ -249,11 +249,6 @@ const Register = () => {
               <Radio id="seller" {...register("role")} value="Seller" />
               <Label htmlFor="seller">Seller</Label>
             </div>
-            {/* seller role button */}
-            <div className="flex items-center gap-2">
-              <Radio id="admin" {...register("role")} value="Admin" />
-              <Label htmlFor="admin">admin</Label>
-            </div>
           </fieldset>
 
           {signupError && <p className="text-red-500 text-sm">{signupError}</p>}
