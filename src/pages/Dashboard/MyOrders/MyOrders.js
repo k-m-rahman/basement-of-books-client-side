@@ -1,19 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { Button, Table } from "flowbite-react";
+import { Table } from "flowbite-react";
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import TableRow from "./TabelRow/TableRow";
 
 const MyOrders = () => {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
 
-  const {
-    data: bookings = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: bookings = [], isLoading } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(
@@ -64,35 +61,7 @@ const MyOrders = () => {
           </Table.Head>
           <Table.Body className="divide-y">
             {bookings.map((booking) => (
-              <Table.Row
-                key={booking._id}
-                className="bg-white dark:border-gray-700 dark:bg-gray-800"
-              >
-                <Table.Cell>
-                  <img
-                    src={booking.image}
-                    className="w-20 h-20 rounded-lg min-w-[70px]"
-                    alt=""
-                  />
-                </Table.Cell>
-                <Table.Cell>{booking.product}</Table.Cell>
-
-                <Table.Cell>${booking.price}</Table.Cell>
-                <Table.Cell>
-                  {!booking.paid && (
-                    <Link to={`/dashboard/payment/${booking._id}`}>
-                      <Button gradientMonochrome="info" size="sm">
-                        Pay
-                      </Button>
-                    </Link>
-                  )}
-                  {booking.paid && (
-                    <span className="bg-gradient-to-r from-green-400 to-green-600 py-2 px-3 rounded-lg text-white font-semibold">
-                      Paid
-                    </span>
-                  )}
-                </Table.Cell>
-              </Table.Row>
+              <TableRow key={booking._id} booking={booking}></TableRow>
             ))}
           </Table.Body>
         </Table>

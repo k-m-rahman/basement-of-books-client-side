@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 const CheckoutForm = ({ booking }) => {
@@ -11,6 +12,8 @@ const CheckoutForm = ({ booking }) => {
 
   const [clientSecret, setClientSecret] = useState("");
   const { price, buyer, buyerEmail, _id, productId } = booking;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:5000/create-payment-intent`, {
@@ -91,14 +94,15 @@ const CheckoutForm = ({ booking }) => {
         body: JSON.stringify(payment),
       })
         .then((res) => res.json())
-        .then((data) => {
+        .then(async (data) => {
           console.log(data);
           if (data.insertedId) {
-            swal(
+            const a = await swal(
               "Congratulations! Your payment was successful",
               `Your transaction id : ${paymentIntent.id}`,
               "success"
             );
+            navigate("/dashboard/myOrders");
           }
         });
     }
