@@ -50,6 +50,26 @@ const MyProducts = () => {
       });
   };
 
+  const handleAdvertiseProduct = async (product) => {
+    console.log(product._id);
+
+    const res = await fetch(
+      `http://localhost:5000/product/advertise/${product._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    );
+    const data = await res.json();
+
+    if (data.modifiedCount > 0) {
+      toast.success(`Successfully added ${product.title} in advertisement`);
+      refetch();
+    }
+  };
+
   if (isLoading) {
     return <Loader></Loader>;
   }
@@ -68,6 +88,7 @@ const MyProducts = () => {
             product={product}
             setShowModal={setShowModal}
             setSelectedProduct={setSelectedProduct}
+            handleAdvertiseProduct={handleAdvertiseProduct}
           ></SellerProductCard>
         ))}
       </div>

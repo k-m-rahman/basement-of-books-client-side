@@ -3,7 +3,12 @@ import React from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { RiAdvertisementFill } from "react-icons/ri";
 
-const SellerProductCard = ({ product, setShowModal, setSelectedProduct }) => {
+const SellerProductCard = ({
+  product,
+  setShowModal,
+  setSelectedProduct,
+  handleAdvertiseProduct,
+}) => {
   const { title, image, location, resalePrice, soldStatus, condition } =
     product;
 
@@ -48,12 +53,17 @@ const SellerProductCard = ({ product, setShowModal, setSelectedProduct }) => {
                 Delete
               </Button>
               {!soldStatus && (
-                <Button size="sm" gradientDuoTone="purpleToBlue">
+                <Button
+                  onClick={() => handleAdvertiseProduct(product)}
+                  size="sm"
+                  gradientDuoTone="purpleToBlue"
+                  disabled={product?.advertised}
+                >
                   <span className="text-black mx-2">
                     {" "}
                     <RiAdvertisementFill></RiAdvertisementFill>{" "}
                   </span>
-                  Advertise
+                  {product?.advertised ? "Advertised" : "Advertise"}
                 </Button>
               )}
             </div>
