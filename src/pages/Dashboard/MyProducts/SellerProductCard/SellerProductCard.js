@@ -3,9 +3,14 @@ import React from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { RiAdvertisementFill } from "react-icons/ri";
 
-const SellerProductCard = ({ product }) => {
+const SellerProductCard = ({ product, setShowModal, setSelectedProduct }) => {
   const { title, image, location, resalePrice, soldStatus, condition } =
     product;
+
+  const handleDelete = () => {
+    setShowModal(true);
+    setSelectedProduct(product);
+  };
   return (
     <div className="mx-auto w-full ">
       <div className="flex  flex-col md:flex-row gap-5 justify-center items-center md:justify-start md:items-start  p-3 bg-slate-100 dark:bg-slate-700 rounded-lg shadow-lg border border-slate-300">
@@ -31,7 +36,11 @@ const SellerProductCard = ({ product }) => {
               <span>Location: {location}</span>
             </p>
             <div className="flex flex-col gap-3 my-5 w-1/2 mx-auto md:h-16">
-              <Button size="sm" gradientMonochrome="failure">
+              <Button
+                onClick={handleDelete}
+                size="sm"
+                gradientMonochrome="failure"
+              >
                 {" "}
                 <span className="text-black mx-2">
                   <AiFillDelete></AiFillDelete>

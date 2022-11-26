@@ -1,10 +1,19 @@
 import { Button, Label, Modal, TextInput } from "flowbite-react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import { ThemeContext } from "../../../contexts/ThemeProvider";
+import { getStoredDarkModeData } from "../../../utils/fakeDb";
 
 const BookingModal = ({ showModal, setShowModal, selectedProduct }) => {
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
+
+  useEffect(() => {
+    const storedDarkModeData = getStoredDarkModeData();
+    setDarkMode(storedDarkModeData);
+  }, []);
+
   const { title, resalePrice, image, _id } = selectedProduct;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -57,6 +66,7 @@ const BookingModal = ({ showModal, setShowModal, selectedProduct }) => {
     <div>
       <React.Fragment>
         <Modal
+          className={darkMode ? "dark" : "light"}
           show={showModal}
           size="lg"
           popup={true}

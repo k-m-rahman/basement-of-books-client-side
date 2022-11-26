@@ -1,12 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import ConfirmationModal from "../../../components/ConfirmationModal/ConfirmationModal";
+import Loader from "../../../components/Loader/Loader";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import SellerProductCard from "./SellerProductCard/SellerProductCard";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const { data: products = [] } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["sellerProducts", user.email],
     queryFn: async () => {
       const res = await fetch(
@@ -22,6 +31,29 @@ const MyProducts = () => {
     },
   });
 
+  const handleDeleteProduct = (productData) => {
+    setShowModal(false);
+    setSelectedProduct(null);
+    fetch(`http://localhost:5000/products/${productData._id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          refetch();
+          toast.success(`${productData.title} has been deleted.`);
+        }
+      });
+  };
+
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
+
   return (
     <div className="p-5 pb-20">
       <div className="mb-10 text-center px-4">
@@ -34,18 +66,21 @@ const MyProducts = () => {
           <SellerProductCard
             key={product._id}
             product={product}
-            // setShowModal={setShowModal}
-            // setSelectedProduct={setSelectedProduct}
+            setShowModal={setShowModal}
+            setSelectedProduct={setSelectedProduct}
           ></SellerProductCard>
         ))}
       </div>
-      {/* {showModal && (
-    <BookingModal
-      showModal={showModal}
-      setShowModal={setShowModal}
-      selectedProduct={selectedProduct}
-    ></BookingModal>
-  )} */}
+      {showModal && (
+        <ConfirmationModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          modalData={selectedProduct}
+          title={"Are you sure you want to delete this product?"}
+          successButtonName={"Delete"}
+          successAction={handleDeleteProduct}
+        ></ConfirmationModal>
+      )}
     </div>
   );
 };
