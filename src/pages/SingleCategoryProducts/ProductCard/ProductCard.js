@@ -26,8 +26,8 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
     setShowModal(true);
   };
   return (
-    <div className="mx-auto w-full">
-      <div className="flex  flex-col md:flex-row gap-5 justify-center items-center md:justify-start md:items-start  p-3 dark:bg-slate-700 rounded-lg shadow-lg border border-slate-200">
+    <div className="mx-auto w-full ">
+      <div className="flex  flex-col md:flex-row gap-5 justify-center items-center md:justify-start md:items-start  p-3 bg-slate-100 dark:bg-slate-700 rounded-lg shadow-lg border border-slate-300">
         <div className=" w-full md:w-1/3">
           <img className="border rounded-lg w-full h-72 " src={image} alt="" />
         </div>
@@ -44,10 +44,10 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
               <p className=" text-center md:text-start font-semibold text-gray-900 dark:text-white mb-2">
                 Post created on : {date2.toDateString()}
               </p>
-              <p className="font-semibold text-gray-900 dark:text-white">
+              <p className="font-semibold md:text-start  text-gray-900 dark:text-white">
                 Condition: {condition}
               </p>
-              <p className="grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
+              <p className="md:text-start grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
                 <span>
                   Original Price:{" "}
                   <span className="text-amber-500">${originalPrice}</span>{" "}
@@ -57,7 +57,7 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
                   <span className="text-amber-500">${resalePrice}</span>{" "}
                 </span>
               </p>
-              <p className="grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
+              <p className="md:text-start grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
                 <span>Location: {location}</span>
                 <span>Used: {timeUsed}</span>
               </p>
