@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Avatar, Button, Table } from "flowbite-react";
+import { Button, Table } from "flowbite-react";
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
@@ -9,7 +9,11 @@ const MyOrders = () => {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
 
-  const { data: bookings = [], isLoading } = useQuery({
+  const {
+    data: bookings = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(
@@ -75,9 +79,18 @@ const MyOrders = () => {
 
                 <Table.Cell>${booking.price}</Table.Cell>
                 <Table.Cell>
-                  <Button gradientMonochrome="info" size="sm">
-                    Pay
-                  </Button>
+                  {!booking.paid && (
+                    <Link to={`/dashboard/payment/${booking._id}`}>
+                      <Button gradientMonochrome="info" size="sm">
+                        Pay
+                      </Button>
+                    </Link>
+                  )}
+                  {booking.paid && (
+                    <span className="bg-gradient-to-r from-green-400 to-green-600 py-2 px-3 rounded-lg text-white font-semibold">
+                      Paid
+                    </span>
+                  )}
                 </Table.Cell>
               </Table.Row>
             ))}

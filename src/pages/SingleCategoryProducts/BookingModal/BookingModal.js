@@ -5,7 +5,7 @@ import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const BookingModal = ({ showModal, setShowModal, selectedProduct }) => {
-  const { title, resalePrice, image } = selectedProduct;
+  const { title, resalePrice, image, _id } = selectedProduct;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleBooking = (event) => {
@@ -23,6 +23,7 @@ const BookingModal = ({ showModal, setShowModal, selectedProduct }) => {
       mobile,
       location,
       image,
+      productId: _id,
     };
     console.log(booking);
     fetch("http://localhost:5000/bookings", {

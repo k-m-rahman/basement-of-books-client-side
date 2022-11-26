@@ -7,6 +7,7 @@ import AllSellers from "../pages/Dashboard/AllSellers/AllSellers";
 import MyBuyers from "../pages/Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
+import Payment from "../pages/Dashboard/Payment/Payment";
 import ReportedItems from "../pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -65,6 +66,16 @@ export const router = createBrowserRouter([
             <MyOrders></MyOrders>
           </BuyerRoute>
         ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: <Payment></Payment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/bookings/${params.id}`, {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }),
       },
       {
         path: "/dashboard/addProduct",
