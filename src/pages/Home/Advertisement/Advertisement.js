@@ -3,6 +3,7 @@ import React from "react";
 import ImageGallery from "react-image-gallery";
 import Lottie from "lottie-react";
 import advertiseAnime from "../../../assets/advertise.json";
+import Loader from "../../../components/Loader/Loader";
 
 const Advertisement = () => {
   const {
@@ -19,6 +20,9 @@ const Advertisement = () => {
       return data;
     },
   });
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
 
   const images = products.map((product) => {
     return {

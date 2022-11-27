@@ -1,35 +1,31 @@
 import React from "react";
-import taxAnimation from "../../../assets/tax.json";
+import bookAnime from "../../../assets/books.json";
 import Lottie from "lottie-react";
-import { Button } from "flowbite-react";
-import { Link } from "react-router-dom";
 
 const Intro = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2  my-20">
         <div className=" p-5 md:pl-20 text-center md:text-start flex flex-col justify-center">
-          <h2 className="capitalize text-4xl md:text-5xl font-semibold text-slate-700 dark:text-slate-100 ">
-            I make taxes easy
-          </h2>
-          <h5 className="text-xl my-5 text-slate-500 dark:text-slate-200">
-            Bring me your files and I wll get your taxes squared away without
-            the headaches.
-          </h5>
-          <p className="font-semibold text-slate-500 dark:text-slate-200">
-            With me on your side, you don't need to stress about taxes any
-            longer! I will find the deductions you missed and make sure every
-            detail of your return is correct. Focus on the important things, not
-            your tax returns.
+          <p className="text-pink-800 dark:text-amber-500 font-bold pb-3">
+            ABOUT BASEMENT OF BOOKS
           </p>
-          <div className="flex justify-center items-center">
-            <Link to="/contactMe">
-              <Button className="w-fit mx-auto my-5"> Contact Me</Button>
-            </Link>
-          </div>
+          <h2 className="capitalize text-3xl md:text-4xl font-semibold text-slate-700 dark:text-slate-100 ">
+            We want you to love our books as much as we do.
+          </h2>
+          <h5 className="text-xl my-5 text-slate-500 font-semibold dark:text-slate-200">
+            At Basement of Books, you can buy and sell your used books very
+            easily. Our range of books is second to none.
+          </h5>
+          <p className=" text-slate-500 dark:text-slate-200">
+            We take great pride in arranging titles from well-known and indie
+            authors alike. Our mission is to get buyer/seller of all ages
+            reading, helping them enhance their education skills. Let’s explore
+            the wonderful world of literature together.
+          </p>
         </div>
         <div className=" w-3/4 mx-auto md:w-3/5">
-          <Lottie animationData={taxAnimation} loop={true}></Lottie>
+          <Lottie animationData={bookAnime} loop={true}></Lottie>
         </div>
       </div>
     </div>
