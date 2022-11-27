@@ -19,7 +19,7 @@ const MyProducts = () => {
     queryKey: ["sellerProducts", user.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/sellerProducts/${user?.email}`,
+        `https://basement-of-books-server-side.vercel.app/sellerProducts/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -34,12 +34,15 @@ const MyProducts = () => {
   const handleDeleteProduct = (productData) => {
     setShowModal(false);
     setSelectedProduct(null);
-    fetch(`http://localhost:5000/products/${productData._id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://basement-of-books-server-side.vercel.app/products/${productData._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -52,7 +55,7 @@ const MyProducts = () => {
 
   const handleAdvertiseProduct = async (product) => {
     const res = await fetch(
-      `http://localhost:5000/product/advertise/${product._id}`,
+      `https://basement-of-books-server-side.vercel.app/product/advertise/${product._id}`,
       {
         method: "PUT",
         headers: {

@@ -1,12 +1,15 @@
 import { Button } from "flowbite-react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Loader from "../../../components/Loader/Loader";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import useRoleOfUser from "../../../hooks/useRoleOfUser";
+import useVerifiedSeller from "../../../hooks/useVerfiedSeller";
+import verifiedIcon from "../../../assets/icons/verified.png";
 
 const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
   const { user } = useContext(AuthContext);
   const [role, isRoleLoading] = useRoleOfUser(user?.email);
+
   const {
     title,
     image,
@@ -19,8 +22,16 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
     sellerName,
     timeUsed,
     sellerEmail,
-    verifiedSeller,
   } = product;
+
+  const [verified, isVerificationLoading] = useVerifiedSeller(sellerEmail);
+  // const [verificationStatus, setVerificationStatus] = useState(false);
+  // console.log(verificationStatus);
+  // useEffect(() => {
+  //   if (verified) {
+  //     setVerificationStatus(verified);
+  //   }
+  // }, [sellerEmail, verified]);
   let date2 = new Date(date);
   const handleBooking = () => {
     setSelectedProduct(product);
@@ -38,7 +49,12 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
           </h5>
           <div className="my-2 ">
             <p className="font-semibold text-center md:text-start text-gray-900 dark:text-white">
-              Seller's Name: {sellerName}
+              <span className="flex justify-start gap-2 items-center">
+                <span>Seller: {sellerName}</span>
+                {verified && (
+                  <img className="w-4 h-4" src={verifiedIcon} alt=""></img>
+                )}
+              </span>
             </p>
 
             <div className="text-sm mt-2">

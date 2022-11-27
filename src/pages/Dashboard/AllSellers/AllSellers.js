@@ -17,11 +17,14 @@ const AllSellers = () => {
   } = useQuery({
     queryKey: ["users", "sellers"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users/sellers", {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+      const res = await fetch(
+        "https://basement-of-books-server-side.vercel.app/users/sellers",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -31,12 +34,15 @@ const AllSellers = () => {
   const handleDeleteSeller = (seller) => {
     setShowModal(false);
     setSelectedSeller(null);
-    fetch(`http://localhost:5000/users/sellers/${seller._id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://basement-of-books-server-side.vercel.app/users/sellers/${seller._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -51,12 +57,15 @@ const AllSellers = () => {
   const handleVerifySeller = (seller) => {
     console.log(seller);
 
-    fetch(`http://localhost:5000/users/sellers/${seller._id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://basement-of-books-server-side.vercel.app/users/sellers/${seller._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

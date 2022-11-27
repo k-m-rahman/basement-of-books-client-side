@@ -29,7 +29,9 @@ const AddProduct = () => {
   const { data: categories = [] } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/categories");
+      const res = await fetch(
+        "https://basement-of-books-server-side.vercel.app/categories"
+      );
       const data = await res.json();
       console.log(data);
       return data;
@@ -101,7 +103,7 @@ const AddProduct = () => {
         };
 
         // adding the ad in database
-        fetch("http://localhost:5000/products", {
+        fetch("https://basement-of-books-server-side.vercel.app/products", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

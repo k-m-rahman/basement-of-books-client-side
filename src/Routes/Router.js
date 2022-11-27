@@ -43,11 +43,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.id}`, {
-            headers: {
-              authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-          }),
+          fetch(
+            `https://basement-of-books-server-side.vercel.app/products/${params.id}`,
+            {
+              headers: {
+                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+              },
+            }
+          ),
       },
     ],
   },
@@ -71,11 +74,14 @@ export const router = createBrowserRouter([
         path: "/dashboard/payment/:id",
         element: <Payment></Payment>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`, {
-            headers: {
-              authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-          }),
+          fetch(
+            `https://basement-of-books-server-side.vercel.app/bookings/${params.id}`,
+            {
+              headers: {
+                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+              },
+            }
+          ),
       },
       {
         path: "/dashboard/addProduct",

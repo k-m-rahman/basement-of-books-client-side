@@ -35,7 +35,7 @@ const BookingModal = ({ showModal, setShowModal, selectedProduct }) => {
       productId: _id,
     };
     console.log(booking);
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://basement-of-books-server-side.vercel.app/bookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

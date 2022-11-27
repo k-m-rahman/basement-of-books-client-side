@@ -12,6 +12,7 @@ const SingleCategoryProducts = () => {
 
   const { category, products } = data;
 
+  console.log(navigation);
   if (navigation.state === "loading") {
     return <Loader></Loader>;
   }

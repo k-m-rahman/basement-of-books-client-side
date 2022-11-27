@@ -9,7 +9,7 @@ const TableRow = ({ booking }) => {
     queryKey: ["products", booking?.productId],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products?productId=${booking.productId}`,
+        `https://basement-of-books-server-side.vercel.app/products?productId=${booking.productId}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("accessToken")}`,

@@ -57,7 +57,7 @@ const Login = () => {
   // saving user as buyer for google log in
   const saveUser = (name, email, photo) => {
     const user = { name, email, photo, role: "Buyer" };
-    fetch("http://localhost:5000/users", {
+    fetch("https://basement-of-books-server-side.vercel.app/users", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

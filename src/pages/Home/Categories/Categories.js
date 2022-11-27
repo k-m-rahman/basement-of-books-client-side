@@ -8,10 +8,12 @@ const Categories = () => {
   const [categories, setCategories] = useState(null);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
   useEffect(() => {
-    axios.get("http://localhost:5000/categories").then((response) => {
-      setCategories(response.data);
-      setCategoriesLoading(false);
-    });
+    axios
+      .get("https://basement-of-books-server-side.vercel.app/categories")
+      .then((response) => {
+        setCategories(response.data);
+        setCategoriesLoading(false);
+      });
   }, []);
 
   if (categoriesLoading) {

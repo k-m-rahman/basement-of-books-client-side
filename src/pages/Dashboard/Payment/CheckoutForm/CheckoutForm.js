@@ -16,14 +16,17 @@ const CheckoutForm = ({ booking }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/create-payment-intent`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify({ price }),
-    })
+    fetch(
+      `https://basement-of-books-server-side.vercel.app/create-payment-intent`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify({ price }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret);
@@ -85,7 +88,7 @@ const CheckoutForm = ({ booking }) => {
         productId,
       };
 
-      fetch(`http://localhost:5000/payments`, {
+      fetch(`https://basement-of-books-server-side.vercel.app/payments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

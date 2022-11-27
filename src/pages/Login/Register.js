@@ -108,7 +108,7 @@ const Register = () => {
 
   const saveUser = (name, email, photo, role) => {
     const user = { name, email, photo, role };
-    fetch("http://localhost:5000/users", {
+    fetch("https://basement-of-books-server-side.vercel.app/users", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

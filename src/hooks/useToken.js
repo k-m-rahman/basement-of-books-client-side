@@ -4,7 +4,9 @@ const useToken = (email) => {
   const [token, setToken] = useState("");
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/jwt?email=${email}`)
+      fetch(
+        `https://basement-of-books-server-side.vercel.app/jwt?email=${email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

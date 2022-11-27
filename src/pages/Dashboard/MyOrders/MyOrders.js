@@ -14,7 +14,7 @@ const MyOrders = () => {
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/bookings?email=${user?.email}`,
+        `https://basement-of-books-server-side.vercel.app/bookings?email=${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("accessToken")}`,

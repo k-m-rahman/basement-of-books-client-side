@@ -6,15 +6,18 @@ const useVerifiedSeller = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/users/role/${email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://basement-of-books-server-side.vercel.app/users/verifiedSeller/${email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          setVerified(data.role);
+          setVerified(data.verified);
           setIsVerificationLoading(false);
         });
     }
