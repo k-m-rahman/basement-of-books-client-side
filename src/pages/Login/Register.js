@@ -12,8 +12,10 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import useToken from "../../hooks/useToken";
+import useTitle from "../../hooks/useTitle";
 
 const Register = () => {
+  useTitle("Register");
   const [signupError, setSignUpError] = useState("");
   const {
     signUp,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLoaderData, useNavigation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import useTitle from "../../hooks/useTitle";
 import BookingModal from "./BookingModal/BookingModal";
 import ProductCard from "./ProductCard/ProductCard";
 
@@ -11,6 +12,7 @@ const SingleCategoryProducts = () => {
   const navigation = useNavigation();
 
   const { category, products } = data;
+  useTitle(`${category.title}`);
 
   console.log(navigation);
   if (navigation.state === "loading") {

@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import ConfirmationModal from "../../../components/ConfirmationModal/ConfirmationModal";
 import Loader from "../../../components/Loader/Loader";
+import useTitle from "../../../hooks/useTitle";
 import TableRow from "./TableRow/TableRow";
 
 const AllBuyers = () => {
+  useTitle("All Buyers");
   const [showModal, setShowModal] = useState(false);
   const [selectedBuyer, setSelectedBuyer] = useState(null);
 

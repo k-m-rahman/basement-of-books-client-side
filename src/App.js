@@ -17,8 +17,8 @@ function App() {
     <div
       className={
         darkMode
-          ? `App dark min-h-screen mx-auto`
-          : `App min-h-screen  mx-auto `
+          ? `App dark min-h-screen max-w-7xl mx-auto`
+          : `App min-h-screen max-w-7xl mx-auto `
       }
     >
       <RouterProvider router={router}></RouterProvider>

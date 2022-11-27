@@ -4,9 +4,11 @@ import toast from "react-hot-toast";
 import ConfirmationModal from "../../../components/ConfirmationModal/ConfirmationModal";
 import Loader from "../../../components/Loader/Loader";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import useTitle from "../../../hooks/useTitle";
 import SellerProductCard from "./SellerProductCard/SellerProductCard";
 
 const MyProducts = () => {
+  useTitle("My Products");
   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);

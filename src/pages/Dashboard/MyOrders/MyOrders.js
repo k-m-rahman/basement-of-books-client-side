@@ -4,9 +4,11 @@ import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import useTitle from "../../../hooks/useTitle";
 import TableRow from "./TabelRow/TableRow";
 
 const MyOrders = () => {
+  useTitle("My Orders");
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
 

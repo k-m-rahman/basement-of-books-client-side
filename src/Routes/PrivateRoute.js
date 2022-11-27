@@ -1,3 +1,4 @@
+import { Spinner } from "flowbite-react";
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
@@ -8,8 +9,8 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-40">
-        <progress className="progress w-56"></progress>
+      <div className="flex justify-center items-center">
+        <Spinner className="mt-10 " size="xl" color="pink" />
       </div>
     );
   }

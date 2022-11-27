@@ -7,8 +7,10 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import useToken from "../../hooks/useToken";
+import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login");
   const { providerLogin, login, setLoading, resetPassword, loading } =
     useContext(AuthContext);
 

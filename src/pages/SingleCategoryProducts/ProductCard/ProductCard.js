@@ -51,8 +51,10 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
             <p className="font-semibold text-center md:text-start text-gray-900 dark:text-white">
               <span className="flex justify-start gap-2 items-center">
                 <span>Seller: {sellerName}</span>
-                {verified && (
+                {verified ? (
                   <img className="w-4 h-4" src={verifiedIcon} alt=""></img>
+                ) : (
+                  <span className="text-xs text-red-500">Not Verified</span>
                 )}
               </span>
             </p>
