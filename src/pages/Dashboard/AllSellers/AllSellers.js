@@ -32,10 +32,11 @@ const AllSellers = () => {
 
   // deleting a seller
   const handleDeleteSeller = (seller) => {
+    console.log(seller);
     setShowModal(false);
     setSelectedSeller(null);
     fetch(
-      `https://basement-of-books-server-side.vercel.app/users/sellers/${seller._id}`,
+      `https://basement-of-books-server-side.vercel.app/users/${seller._id}`,
       {
         method: "DELETE",
         headers: {

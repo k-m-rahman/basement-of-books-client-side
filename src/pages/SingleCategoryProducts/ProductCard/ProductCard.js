@@ -58,13 +58,13 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
             </p>
 
             <div className="text-sm mt-2">
-              <p className=" text-center md:text-start font-semibold text-gray-900 dark:text-white mb-2">
+              <p className=" text-start font-semibold text-gray-900 dark:text-white mb-2">
                 Post created on : {date2.toDateString()}
               </p>
-              <p className="font-semibold md:text-start  text-gray-900 dark:text-white">
+              <p className="font-semibold text-start  text-gray-900 dark:text-white">
                 Condition: {condition}
               </p>
-              <p className="md:text-start grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
+              <p className=" mt-3 text-start grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
                 <span>
                   Original Price:{" "}
                   <span className="text-amber-500">${originalPrice}</span>{" "}
@@ -74,13 +74,13 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
                   <span className="text-amber-500">${resalePrice}</span>{" "}
                 </span>
               </p>
-              <p className="md:text-start grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
+              <p className="text-start grid grid-cols-2 gap-2 font-semibold text-gray-900 dark:text-white">
                 <span>Location: {location}</span>
                 <span>Used: {timeUsed}</span>
               </p>
             </div>
           </div>
-          <p className="font-normal md:h-16 md:shadow-sm md:border p-2 rounded md:overflow-auto italic text-sm text-gray-700 dark:text-gray-400">
+          <p className="font-normal md:h-16 md:shadow-sm md:border pt-2 md:p-2 rounded md:overflow-auto italic text-sm text-gray-700 dark:text-gray-400 text-center ">
             {description}
           </p>
 
