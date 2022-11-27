@@ -19,6 +19,7 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
     sellerName,
     timeUsed,
     sellerEmail,
+    verifiedSeller,
   } = product;
   let date2 = new Date(date);
   const handleBooking = () => {
