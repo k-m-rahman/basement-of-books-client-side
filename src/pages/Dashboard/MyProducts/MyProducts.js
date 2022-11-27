@@ -51,8 +51,6 @@ const MyProducts = () => {
   };
 
   const handleAdvertiseProduct = async (product) => {
-    console.log(product._id);
-
     const res = await fetch(
       `http://localhost:5000/product/advertise/${product._id}`,
       {
