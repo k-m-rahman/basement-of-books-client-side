@@ -72,7 +72,7 @@ const Register = () => {
             setSignUpError("");
             handleEmailVerification();
             handleProfileUpdate(name, imgData.data.url);
-            saveUser(name, email, role);
+            saveUser(name, email, imgData.data.url, role);
           })
           .catch((error) => {
             setSignUpError(error.message);
@@ -106,8 +106,8 @@ const Register = () => {
       .catch((error) => console.error(error));
   };
 
-  const saveUser = (name, email, role) => {
-    const user = { name, email, role };
+  const saveUser = (name, email, photo, role) => {
+    const user = { name, email, photo, role };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {

@@ -43,7 +43,7 @@ const Login = () => {
         console.log(user);
         setLoginError("");
         toast.success("Logged in successfully!", { duration: 2000 });
-        saveUser(user.displayName, user.email);
+        saveUser(user.displayName, user.email, user.photoUrl);
       })
       .catch((error) => {
         console.error(error);
@@ -55,8 +55,8 @@ const Login = () => {
   };
 
   // saving user as buyer for google log in
-  const saveUser = (name, email) => {
-    const user = { name, email, role: "Buyer" };
+  const saveUser = (name, email, photo) => {
+    const user = { name, email, photo, role: "Buyer" };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
