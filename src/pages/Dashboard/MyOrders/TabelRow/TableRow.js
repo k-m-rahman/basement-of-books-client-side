@@ -39,7 +39,7 @@ const TableRow = ({ booking }) => {
           <Loader></Loader>
         ) : (
           <>
-            {product.soldStatus && !booking.paid && (
+            {product?.soldStatus && !booking?.paid && (
               <Button
                 disabled
                 className="bg-gradient-to-r from-red-400 to-red-600"
@@ -47,7 +47,7 @@ const TableRow = ({ booking }) => {
                 Not Available
               </Button>
             )}
-            {!product.soldStatus && !booking.paid && (
+            {!product?.soldStatus && !booking?.paid && (
               <Link to={`/dashboard/payment/${booking._id}`}>
                 <Button gradientMonochrome="info" size="sm">
                   Pay
