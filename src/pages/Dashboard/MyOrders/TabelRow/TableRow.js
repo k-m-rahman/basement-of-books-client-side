@@ -40,9 +40,12 @@ const TableRow = ({ booking }) => {
         ) : (
           <>
             {product.soldStatus && !booking.paid && (
-              <span className="bg-gradient-to-r from-red-400 to-red-600 py-2 px-3 rounded-lg text-white font-semibold">
+              <Button
+                disabled
+                className="bg-gradient-to-r from-red-400 to-red-600"
+              >
                 Not Available
-              </span>
+              </Button>
             )}
             {!product.soldStatus && !booking.paid && (
               <Link to={`/dashboard/payment/${booking._id}`}>
