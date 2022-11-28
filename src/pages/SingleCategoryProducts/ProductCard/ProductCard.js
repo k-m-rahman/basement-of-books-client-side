@@ -1,10 +1,11 @@
 import { Button, Spinner } from "flowbite-react";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Loader from "../../../components/Loader/Loader";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import useRoleOfUser from "../../../hooks/useRoleOfUser";
 import useVerifiedSeller from "../../../hooks/useVerfiedSeller";
 import verifiedIcon from "../../../assets/icons/verified.png";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
   const { user } = useContext(AuthContext);
@@ -25,17 +26,29 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
   } = product;
 
   const [verified, isVerificationLoading] = useVerifiedSeller(sellerEmail);
-  // const [verificationStatus, setVerificationStatus] = useState(false);
-  // console.log(verificationStatus);
-  // useEffect(() => {
-  //   if (verified) {
-  //     setVerificationStatus(verified);
-  //   }
-  // }, [sellerEmail, verified]);
+
   let date2 = new Date(date);
   const handleBooking = () => {
     setSelectedProduct(product);
     setShowModal(true);
+  };
+
+  const handleReport = () => {
+    fetch(
+      `https://basement-of-books-server-side.vercel.app/products/reportToAdmin/${product._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success(`Successfully reported to the admin`);
+        }
+      });
   };
   return (
     <div className="mx-auto w-full ">
@@ -91,21 +104,29 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
           {isRoleLoading ? (
             <Loader></Loader>
           ) : (
-            <div className="my-4 ">
-              <Button
-                onClick={handleBooking}
-                disabled={role === "Buyer" ? false : true}
-                className="mx-auto"
-                color="purple"
-              >
-                Book Now
-              </Button>
+            <>
+              <div className="my-4 flex justify-center gap-3">
+                <Button
+                  onClick={handleBooking}
+                  disabled={role === "Buyer" ? false : true}
+                  color="purple"
+                >
+                  Book Now
+                </Button>
+                <Button
+                  onClick={handleReport}
+                  color="warning"
+                  disabled={role === "Buyer" ? false : true}
+                >
+                  Report
+                </Button>
+              </div>
               {role !== "Buyer" && (
-                <p className="text-gray-700 dark:text-white mt-2 text-xs">
-                  To book this item please login with a buyer account
+                <p className="text-gray-700 dark:text-white mt-2 text-xs ">
+                  To book or report this item please login with a buyer account
                 </p>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>
