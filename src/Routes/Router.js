@@ -14,6 +14,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Login/Register";
+import SearchedBooks from "../pages/SearchedBooks/SearchedBooks";
 import SingleCategoryProducts from "../pages/SingleCategoryProducts/SingleCategoryProducts";
 import AdminRoute from "./AdmitRoute";
 import BuyerRoute from "./BuyerRoute";
@@ -52,6 +53,23 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(
             `https://basement-of-books-server-side.vercel.app/products/${params.id}`,
+            {
+              headers: {
+                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+              },
+            }
+          ),
+      },
+      {
+        path: "/searchedBooks/:searchQuery",
+        element: (
+          <PrivateRoute>
+            <SearchedBooks></SearchedBooks>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://basement-of-books-server-side.vercel.app/searchedProducts/${params.searchQuery}`,
             {
               headers: {
                 authorization: `bearer ${localStorage.getItem("accessToken")}`,

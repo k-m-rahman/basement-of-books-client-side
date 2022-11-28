@@ -19,8 +19,9 @@ const Header = () => {
 
   const handleSearchBooks = (event) => {
     event.preventDefault();
+
     const form = event.target;
-    const book = form.service.value;
+    const book = form?.book?.value;
     form.reset();
     navigate(`/searchedBooks/${book}`);
   };
@@ -162,10 +163,10 @@ const Header = () => {
         <form onSubmit={handleSearchBooks} className="relative col-span-5">
           <TextInput
             className=" lg:w-[300px] "
-            id="service"
-            name="service"
+            id="book"
+            name="book"
             type="text"
-            placeholder="Search your desired service"
+            placeholder="Search your desired book"
           />
           <button
             type="submit"

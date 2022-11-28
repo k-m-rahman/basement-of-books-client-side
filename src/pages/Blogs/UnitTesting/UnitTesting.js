@@ -11,7 +11,7 @@ const UnitTesting = () => {
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           What is a unit test? Why should we write unit tests?
         </h5>
-        <p className="font-normal text-gray-700 dark:text-gray-400 text-start">
+        <div className="font-normal text-gray-700 dark:text-gray-400 text-start">
           Unit testing is a software development process in which the smallest
           testable parts of an application, called units, are individually and
           independently scrutinized for proper operation. This testing
@@ -43,7 +43,7 @@ const UnitTesting = () => {
               Developers can also re-use code, migrating it to new projects.
             </li>
           </ul>
-        </p>
+        </div>
       </Card>
     </div>
   );

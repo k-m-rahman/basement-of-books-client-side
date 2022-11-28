@@ -19,7 +19,7 @@ const AdminRoute = ({ children }) => {
   }
   //   return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
   return (
-    <h2 className="text-4xl text-red-500 text-center mt-5">
+    <h2 className="text-4xl text-red-500 text-center py-20">
       You are not an admin..Please login with an admin profile
     </h2>
   );

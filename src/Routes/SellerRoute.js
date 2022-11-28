@@ -19,7 +19,7 @@ const SellerRoute = ({ children }) => {
   }
   //   return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
   return (
-    <h2 className="text-4xl text-red-500 text-center mt-5">
+    <h2 className="text-4xl text-red-500 text-center mt-5 py-20">
       You are not a seller..Please login with a seller profile
     </h2>
   );

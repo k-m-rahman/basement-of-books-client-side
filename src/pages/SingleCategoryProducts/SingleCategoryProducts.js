@@ -15,7 +15,6 @@ const SingleCategoryProducts = () => {
   const { category, products } = data;
   useTitle(`${category.title}`);
 
-  console.log(navigation);
   if (navigation.state === "loading") {
     return <Loader></Loader>;
   }

@@ -97,7 +97,7 @@ const ProductCard = ({ product, setShowModal, setSelectedProduct }) => {
               </p>
             </div>
           </div>
-          <p className="font-normal md:h-16 md:shadow-sm md:border pt-2 md:p-2 rounded md:overflow-auto italic text-sm text-gray-700 dark:text-gray-400 text-center ">
+          <p className="font-normal md:h-16 md:shadow-sm md:border pt-2 md:p-2 rounded md:overflow-auto italic text-sm text-gray-700 dark:text-gray-400 text-center flex items-center justify-center">
             {description}
           </p>
 
