@@ -9,7 +9,7 @@ const ReactVsAngulaVsVue = () => {
       </h3>
       <img
         alt=""
-        className="mb-2 rounded-xl"
+        className="mb-2 rounded-xl w-full"
         src="https://www.simplilearn.com/ice9/free_resources_article_thumb/recact_angular_vue.jpg"
       ></img>
       <Table>
