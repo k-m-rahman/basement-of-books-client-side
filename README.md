@@ -70,9 +70,3 @@
 - ### **npm start**
 
 <br>
-
-# **Admin credentials**
-
-adminEmail: admin@test.com
-
-adminPassword: !Abcde1
